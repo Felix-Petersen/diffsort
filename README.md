@@ -43,7 +43,7 @@ Will be published soon.
 @inproceedings{Petersen2021-diffsort,
   title={Differentiable Sorting Networks for Scalable Sorting and Ranking Supervision},
   author={Petersen, Felix and Borgelt, Christian and Kuehne, Hilde and Deussen, Oliver},
-  journal={Neural Information Processing Systems (NeurIPS)},
+  journal={International Conference on Machine Learning (ICML)},
   year={2021}
 }
 ```
