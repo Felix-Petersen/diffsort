@@ -2,6 +2,9 @@
 
 ![diffsort_logo](diffsort_logo.png)
 
+Differentiable Sorting Networks allow propagating gradients through a smooth differentiable approximate sorting function.
+Herein, diffsort outperforms existing differentiable sorting functions on the four-digit MNIST and the SVHN sorting tasks.
+In this repo, we present the PyTorch implementation of our ICML 2021 paper on differentiable sorting networks.
 
 ## Installation
 
