@@ -4,7 +4,7 @@
 
 Official implementation for our ICML 2021 Paper "Differentiable Sorting Networks for Scalable Sorting and Ranking Supervision".
 In this work, we leverage classic sorting networks and relax them to propose a new differentiable sorting function: diffsort.
-Diffsort allows propagating gradients through a smooth differentiable approximate sorting function.
+This allows propagating gradients through (an approximation of) the sorting / ranking function / operation.
 Herein, diffsort outperforms existing differentiable sorting functions on the four-digit MNIST and the SVHN sorting tasks.
 In this repo, we present the PyTorch implementation of our ICML 2021 paper on differentiable sorting networks.
 Paper @ [ArXiv](https://arxiv.org/pdf/2105.04019.pdf),
