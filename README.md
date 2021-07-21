@@ -42,7 +42,8 @@ print(sorted_vectors)
 
 ## Experiments
 
-Will be published soon.
+You can find the main experiment in this [Colab notebook](https://colab.research.google.com/drive/1q0TZFFYB9FlOJYWKt0_7ZaXQT190anhm?usp=sharing).
+The remaining experiments as well as the commands to reproduce all results will be published soon.
 
 ## Citing
 
