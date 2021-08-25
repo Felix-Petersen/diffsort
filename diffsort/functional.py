@@ -12,16 +12,25 @@ def execute_sort(
         softmax_fn='logistic_phi'
 ):
     x = vectors
-    X = torch.eye(vectors.shape[1]).to(sorting_network[0][0].device).repeat(vectors.shape[0], 1, 1)
+    X = torch.eye(vectors.shape[1], dtype=x.dtype, device=x.device).repeat(x.shape[0], 1, 1)
 
     for split_a, split_b, combine_min, combine_max in sorting_network:
+        split_a = split_a.type(x.dtype)
+        split_b = split_b.type(x.dtype)
+        combine_min = combine_min.type(x.dtype)
+        combine_max = combine_max.type(x.dtype)
+
         a, b = x @ split_a.T, x @ split_b.T
 
         if softmax_fn == 'logistic':
-            alpha = torch.sigmoid((b-a) * steepness)
+            # float conversion necessary as PyTorch doesn't support Half for sigmoid as of 25. August 2021
+            new_type = torch.float32 if x.dtype == torch.float16 else x.dtype
+            alpha = torch.sigmoid((b-a).type(new_type) * steepness).type(x.dtype)
 
         elif softmax_fn == 'logistic_phi':
-            alpha = torch.sigmoid((b-a) * steepness / ((a-b).abs() + 1.e-10).pow(art_lambda))
+            # float conversion necessary as PyTorch doesn't support Half for sigmoid and pow as of 25. August 2021
+            new_type = torch.float32 if x.dtype == torch.float16 else x.dtype
+            alpha = (torch.sigmoid((b-a).type(new_type) * steepness / ((a-b).type(new_type).abs() + 1.e-10)).pow(art_lambda)).type(x.dtype)
 
         else:
             raise NotImplementedError('softmax method `{}` unknown'.format(softmax_fn))
