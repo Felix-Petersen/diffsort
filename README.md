@@ -10,21 +10,21 @@ In this repo, we present the PyTorch implementation of our ICML 2021 paper on di
 Paper @ [ArXiv](https://arxiv.org/pdf/2105.04019.pdf),
 Video @ [Youtube](https://www.youtube.com/watch?v=38dvqdYEs1o).
 
-## Installation
+## 💻 Installation
 
 `diffsort` can be installed via pip from PyPI with
-```bash
+```shell
 pip install diffsort
 ```
 
 Or from source, e.g., in a virtual environment like
-```bash
+```shell
 virtualenv -p python3 .env1
 . .env1/bin/activate
 pip install .
 ```
 
-## Usage
+## 👩‍💻 Usage
 
 ```python
 import torch
@@ -40,12 +40,24 @@ sorted_vectors, permutation_matrices = sorter(vectors)
 print(sorted_vectors)
 ```
 
-## Experiments
+## 🧪 Experiments 
 
 You can find the main experiment in this [Colab notebook](https://colab.research.google.com/drive/1q0TZFFYB9FlOJYWKt0_7ZaXQT190anhm?usp=sharing).
-The remaining experiments as well as the commands to reproduce all results will be published soon.
 
-## Citing
+You can run the four-digit MNIST experiment as
+```shell
+python experiments/main.py -n 5 -m odd_even -s 10 -d mnist
+```
+or for the bitonic network
+```shell
+python experiments/main.py -n 16 -m bitonic -s 20 -d mnist
+```
+or for SVHN
+```shell
+python experiments/main.py -n 5 -m odd_even -s 10 -d svhn
+```
+
+## 📖 Citing
 
 ```bibtex
 @inproceedings{Petersen2021-diffsort,
