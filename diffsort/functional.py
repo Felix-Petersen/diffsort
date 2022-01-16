@@ -30,7 +30,7 @@ def execute_sort(
         elif softmax_fn == 'logistic_phi':
             # float conversion necessary as PyTorch doesn't support Half for sigmoid and pow as of 25. August 2021
             new_type = torch.float32 if x.dtype == torch.float16 else x.dtype
-            alpha = (torch.sigmoid((b-a).type(new_type) * steepness / ((a-b).type(new_type).abs() + 1.e-10)).pow(art_lambda)).type(x.dtype)
+            alpha = torch.sigmoid((b-a).type(new_type) * steepness / ((a-b).type(new_type).abs() + 1.e-10).pow(art_lambda)).type(x.dtype)
 
         else:
             raise NotImplementedError('softmax method `{}` unknown'.format(softmax_fn))
