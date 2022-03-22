@@ -6,12 +6,14 @@
 import collections
 import functools
 import operator
+import numpy as np
 
 
 def avg_list_of_dicts(list_of_dicts):
-    summed = functools.reduce(operator.add, map(collections.Counter, list_of_dicts))
-    averaged = {k: summed[k] / len(list_of_dicts) for k in summed}
-    return averaged
+    result = {}
+    for k in list_of_dicts[0]:
+        result[k] = np.mean([d[k] for d in list_of_dicts])
+    return result
 
 
 def load_n(loader, n):

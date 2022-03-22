@@ -2,13 +2,16 @@
 
 ![diffsort_logo](diffsort_logo.png)
 
-Official implementation for our ICML 2021 Paper "Differentiable Sorting Networks for Scalable Sorting and Ranking Supervision".
+Official implementation for our [ICLR 2022 Paper "Monotonic Differentiable Sorting Networks"](https://arxiv.org/abs/2203.09630) and our [ICML 2021 Paper "Differentiable Sorting Networks for Scalable Sorting and Ranking Supervision"](https://arxiv.org/pdf/2105.04019.pdf).
 In this work, we leverage classic sorting networks and relax them to propose a new differentiable sorting function: diffsort.
 This allows propagating gradients through (an approximation of) the sorting / ranking function / operation.
 Herein, diffsort outperforms existing differentiable sorting functions on the four-digit MNIST and the SVHN sorting tasks.
-In this repo, we present the PyTorch implementation of our ICML 2021 paper on differentiable sorting networks.
-Paper @ [ArXiv](https://arxiv.org/pdf/2105.04019.pdf),
-Video @ [Youtube](https://www.youtube.com/watch?v=38dvqdYEs1o).
+In this repo, we present the PyTorch implementation of differentiable sorting networks.
+
+Video @ [Youtube](https://www.youtube.com/watch?v=Rl-sFaE1z4M).
+
+[![video](https://www.petersen.ai/images/monotonic_diffsort_thumbnail_2_tiny.jpg)](https://www.youtube.com/watch?v=Rl-sFaE1z4M)
+
 
 ## 💻 Installation
 
@@ -60,7 +63,14 @@ python experiments/main.py -n 5 -m odd_even -s 10 -d svhn
 ## 📖 Citing
 
 ```bibtex
-@inproceedings{Petersen2021-diffsort,
+@inproceedings{petersen2022monotonic,
+  title={Monotonic Differentiable Sorting Networks},
+  author={Petersen, Felix and Borgelt, Christian and Kuehne, Hilde and Deussen, Oliver},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2022}
+}
+
+@inproceedings{petersen2021diffsort,
   title={Differentiable Sorting Networks for Scalable Sorting and Ranking Supervision},
   author={Petersen, Felix and Borgelt, Christian and Kuehne, Hilde and Deussen, Oliver},
   booktitle={International Conference on Machine Learning (ICML)},

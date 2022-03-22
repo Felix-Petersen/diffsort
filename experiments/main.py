@@ -38,9 +38,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='MNIST sorting benchmark')
     parser.add_argument('-b', '--batch_size', type=int, default=100)
     parser.add_argument('-n', '--num_compare', type=int, default=5)
-    parser.add_argument('-i', '--num_steps', type=int, default=1_000_000, help='number of training steps')
-    parser.add_argument('-e', '--eval_freq', type=int, default=2_500, help='the evaluation frequency')
+    parser.add_argument('-i', '--num_steps', type=int, default=100_000, help='number of training steps')
+    parser.add_argument('-e', '--eval_freq', type=int, default=1_000, help='the evaluation frequency')
     parser.add_argument('-m', '--method', type=str, default='odd_even', choices=['odd_even', 'bitonic'])
+    parser.add_argument('-x', '--distribution', type=str, default='cauchy', choices=[
+        'cauchy',
+        'reciprocal',
+        'optimal',
+        'gaussian',
+        'logistic',
+        'logistic_phi',
+    ])
     parser.add_argument('-s', '--steepness', type=float, default=10)
     parser.add_argument('-a', '--art_lambda', type=float, default=0.25)
     parser.add_argument('-d', '--dataset', type=str, default='mnist', choices=['mnist', 'svhn'])

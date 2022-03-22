@@ -23,7 +23,8 @@ class DiffSortNet(torch.nn.Module):
         device: str = 'cpu',
         steepness: float = 10.0,
         art_lambda: float = 0.25,
-        interpolation_type: str = 'logistic_phi',
+        interpolation_type: str = None,
+        distribution: str = 'cauchy',
     ):
         super(DiffSortNet, self).__init__()
         self.sorting_network_type = sorting_network_type
@@ -31,13 +32,22 @@ class DiffSortNet(torch.nn.Module):
 
         self.sorting_network = get_sorting_network(sorting_network_type, size, device)
 
+        if interpolation_type is not None:
+            assert distribution is None or distribution == 'cauchy' or distribution == interpolation_type, (
+                'Two different distributions have been set (distribution={} and interpolation_type={}); however, '
+                'they have the same interpretation and interpolation_type is a deprecated argument'.format(
+                    distribution, interpolation_type
+                )
+            )
+            distribution = interpolation_type
+
         self.steepness = steepness
         self.art_lambda = art_lambda
-        self.interpolation_type = interpolation_type
+        self.distribution = distribution
 
     def forward(self, vectors):
         assert len(vectors.shape) == 2
         assert vectors.shape[1] == self.size
         return sort(
-            self.sorting_network, vectors, self.steepness, self.art_lambda, self.interpolation_type
+            self.sorting_network, vectors, self.steepness, self.art_lambda, self.distribution
         )
