@@ -44,7 +44,8 @@ class SVHNConvNet(nn.Module):
 
     def forward(self, x):
         x_shape = x.shape
-        assert len(x_shape) == 4, x.shape
+        if len(x_shape) == 5:
+            x = x.view(-1, *x_shape[-3:])
         x = F.relu(self.conv1(x))
         x = F.max_pool2d(x, 2, 2)
         x = F.relu(self.conv2(x))
@@ -53,7 +54,7 @@ class SVHNConvNet(nn.Module):
         x = F.max_pool2d(x, 2, 2)
         x = F.relu(self.conv4(x))
         x = F.max_pool2d(x, 2, 2)
-        x = x.view(-1, 3*3*256)
+        x = x.view(*x_shape[:-3], 3*3*256)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x

@@ -73,15 +73,24 @@ if __name__ == "__main__":
     splits = MultiDigitSplits(dataset=args.dataset, num_compare=args.num_compare, seed=args.seed)
 
     # drop_last needs to be true, otherwise error with testing for SVHN
-    data_loader_train = splits.get_train_loader(
-        args.batch_size, drop_last=True
-    )
-    data_loader_valid = splits.get_valid_loader(
-        args.batch_size, drop_last=True
-    )
-    data_loader_test = splits.get_test_loader(
-        args.batch_size, drop_last=True
-    )
+    loader_kwargs = dict(batch_size=args.batch_size, drop_last=True)
+
+    if args.dataset == 'svhn':
+        loader_kwargs['batch_size'] = args.batch_size * args.num_compare
+
+        def collate_fn(batch):
+            data, targets = zip(*batch)
+            data = torch.stack(data)
+            targets = torch.tensor(targets)  # targets is a tuple of int
+            data = data.reshape(args.batch_size, args.num_compare, *data.shape[1:])
+            targets = targets.reshape(args.batch_size, args.num_compare, *targets.shape[1:])
+            return data, targets
+
+        loader_kwargs['collate_fn'] = collate_fn
+
+    data_loader_train = splits.get_train_loader(**loader_kwargs)
+    data_loader_valid = splits.get_valid_loader(**loader_kwargs)
+    data_loader_test = splits.get_test_loader(**loader_kwargs)
 
     if args.dataset == 'mnist':
         model = models.MultiDigitMNISTNet().to(args.device)
