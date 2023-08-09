@@ -43,6 +43,12 @@ sorted_vectors, permutation_matrices = sorter(vectors)
 print(sorted_vectors)
 ```
 
+> **Math vs. Code Convention**
+>
+> In the code, we follow the convention that allows `sort(x) = x @ P` where `P` is the permutation matrix (`P = sorter(x)[1]`).
+> In contrast, in typical mathematical (written) notation, we would multipy as $\mathrm{sort}(x) = P \cdot x$. Accordingly,
+> `P` = $P^\top$, i.e., there is a transpose between typical mathematical permutation notation (which is also used in the papers) and the permutation matrices returned by the code.
+
 ## 🧪 Experiments 
 
 You can find the main experiment in this [Colab notebook](https://colab.research.google.com/drive/1q0TZFFYB9FlOJYWKt0_7ZaXQT190anhm?usp=sharing).
